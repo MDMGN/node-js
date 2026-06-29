@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -10,6 +11,10 @@
     <form method="POST" action="todos/create">
         <input type="text" name="title">
         <button type="submit">Agregar</button>
+    </form>
+
+    <form method="PUT">
+        <button type="submit"> Eliminar</button>
     </form>
     <ul>
         {{#each todos}}
