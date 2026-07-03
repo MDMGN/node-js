@@ -7,21 +7,28 @@ import {
   getTodos,
   updateTodo,
 } from "../controllers/todos.controller.js";
+import todoIdValidator from "../middlewares/todoId.validator.middleware.js";
+import existsTodo from "../middlewares/existsTodo.middleware.js";
+
+import todoValidator from "../middlewares/todo.validator.middleware.js";
+import createTodoSchema from "../schemas/createTodo.schema.js";
 
 export const todosRouter = Router();
+// Pipeline para validar el parámetro id en las rutas que lo requieran
+todosRouter.param("id", todoIdValidator);
 
 // READ
 todosRouter.get("/", getTodos);
 
-todosRouter.get("/:id", getTodoById);
+todosRouter.get("/:id", existsTodo, getTodoById);
 //
 
 // CREATE
-todosRouter.post("/", createTodo);
+todosRouter.post("/",todoValidator(createTodoSchema), createTodo);
 //
 
 // DELETE
-todosRouter.delete("/:id", deleteTodo);
+todosRouter.delete("/:id", existsTodo, deleteTodo);
 
 // UPDATE
-todosRouter.put("/:id", updateTodo);
+todosRouter.put("/:id", existsTodo, todoValidator, updateTodo);
