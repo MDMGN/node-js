@@ -1,8 +1,8 @@
 import * as todosModel from "../models/todos.model.js";
 
-const existsTodo = (req, res, next) => {
+const existsTodo = async (req, res, next) => {
   // Validamos que la tarea con el id proporcionado exista en el modelo
-  const found = todosModel.getTodoById(req.params.id);
+  const found = await todosModel.getTodoById(req.params.id);
   // Si no existe, devolvemos el mensaje de error
   if (!found) {
     return res.status(404).json({
@@ -11,6 +11,7 @@ const existsTodo = (req, res, next) => {
     });
   }
   // Si existe, continuamos con la ejecución de la ruta
+  req.todo = found; // Guardamos la tarea encontrada en req.todo para que esté disponible en los controladores
   next();
 };
 

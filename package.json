@@ -13,8 +13,8 @@
   "description": "",
   "dependencies": {
     "express": "^5.2.1",
-    "handlebars": "^4.7.9",
     "hbs": "^4.2.1",
+    "mysql2": "^3.22.5",
     "zod": "^4.4.3"
   }
 }
