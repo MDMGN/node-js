@@ -3,6 +3,7 @@ import { logger } from "./middlewares/logger.js";
 import { todosRouter } from "./routes/todos.route.js";
 import { todos } from "./data/todos.js";
 import { homeRouter } from "./routes/home.route.js";
+import authRouter from "./routes/auth.route.js";
 
 const app = express();
 const port = process.env.PORT;
@@ -23,6 +24,8 @@ app.use(logger);
 // Rutas
 // Registramos el router de tareas como middleware para la ruta /todos
 app.use("/todos", todosRouter);
+// Registramos el router de autenticación como middleware para la ruta /auth
+app.use("/auth", authRouter);
 
 app.use("/", homeRouter);
 
