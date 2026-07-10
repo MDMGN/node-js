@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import * as authModel from "../models/auth.model.js";
+import { createToken } from "../services/jwt.services.js";
 
 export const registerController = async (req, res) => {
   const { username, password, email } = req.body;
@@ -49,8 +50,20 @@ export const loginController = async (req, res) => {
     });
   }
 
+  const token = createToken({
+    sub: user.id,
+    name: user.name,
+    rol: user.rol,
+    email: user.email,
+  });
+
   return res.status(200).json({
     success: true,
-    data: user,
+    data: {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      token,
+    },
   });
 };

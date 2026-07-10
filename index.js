@@ -4,12 +4,14 @@ import { todosRouter } from "./routes/todos.route.js";
 import { todos } from "./data/todos.js";
 import { homeRouter } from "./routes/home.route.js";
 import authRouter from "./routes/auth.route.js";
+import authMiddleware from "./middlewares/auth.middleware.js";
+import helmet from "helmet";
 
 const app = express();
 const port = process.env.PORT;
 
 //Midlewares
-
+app.use(helmet());
 // Indicamos que vamos a usar Handlebars como motor de plantillas
 app.set("view engine", "hbs");
 // Indicamos la carpeta donde se encuentran las vistas
@@ -23,7 +25,7 @@ app.use(logger);
 
 // Rutas
 // Registramos el router de tareas como middleware para la ruta /todos
-app.use("/todos", todosRouter);
+app.use("/todos", authMiddleware, todosRouter);
 // Registramos el router de autenticación como middleware para la ruta /auth
 app.use("/auth", authRouter);
 

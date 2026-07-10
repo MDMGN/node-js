@@ -13,11 +13,18 @@ import existsTodo from "../middlewares/existsTodo.middleware.js";
 import todoValidator from "../middlewares/todo.validator.middleware.js";
 import createTodoSchema from "../schemas/createTodo.schema.js";
 import updateTodoSchema from "../schemas/updateTodo.schema.js";
+import rateLimit from "express-rate-limit";
 
 export const todosRouter = Router();
 // Pipeline para validar el parámetro id en las rutas que lo requieran
 todosRouter.param("id", todoIdValidator);
 
+const todosRateLimit = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 1,
+});
+
+todosRouter.use(todosRateLimit);
 // READ
 todosRouter.get("/", getTodos);
 
