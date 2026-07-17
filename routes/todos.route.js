@@ -19,12 +19,12 @@ export const todosRouter = Router();
 // Pipeline para validar el parámetro id en las rutas que lo requieran
 todosRouter.param("id", todoIdValidator);
 
-const todosRateLimit = rateLimit({
+/* const todosRateLimit = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 1,
 });
 
-todosRouter.use(todosRateLimit);
+todosRouter.use(todosRateLimit); */
 // READ
 todosRouter.get("/", getTodos);
 

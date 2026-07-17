@@ -6,12 +6,15 @@ import { homeRouter } from "./routes/home.route.js";
 import authRouter from "./routes/auth.route.js";
 import authMiddleware from "./middlewares/auth.middleware.js";
 import helmet from "helmet";
+import cors from "cors";
 
 const app = express();
 const port = process.env.PORT;
 
 //Midlewares
 app.use(helmet());
+// CORS
+app.use(cors());
 // Indicamos que vamos a usar Handlebars como motor de plantillas
 app.set("view engine", "hbs");
 // Indicamos la carpeta donde se encuentran las vistas
