@@ -37,7 +37,7 @@ todosRouter.post("/", todoValidator(createTodoSchema), createTodo);
 
 // DELETE
 todosRouter.delete("/:id", existsTodo, deleteTodo);
-
+  
 // UPDATE
 todosRouter.put(
   "/:id",
